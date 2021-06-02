@@ -22,12 +22,36 @@ header{
     cursor: pointer;
 }
 
-img{
-    width: 25%;
-    height: 250px;
+.styleProduct{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    height: auto;
+    width: 100%;
 }
 
+.productRef{
+    border-radius: 20px;
+    margin-bottom: 50px;
+    background-color: rgba(169, 169, 169, 0.6);
+    padding: 20px;
 
+}
+img{
+    width: 650px;
+    height: 500px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    
+}
 
-
+.productName{
+    font-size: 1.3em;
+    margin-bottom: 5px;
+}
+.productPrice{
+    font-size: 1.3em;
+}
 

@@ -23,8 +23,45 @@ header {
   cursor: pointer;
 }
 
+.styleProduct {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  height: auto;
+  width: 100%;
+}
+
+.productRef {
+  border-radius: 20px;
+  margin-bottom: 50px;
+  background-color: rgba(169, 169, 169, 0.6);
+  padding: 20px;
+}
+
 img {
-  width: 25%;
-  height: 250px;
+  width: 650px;
+  height: 500px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin-bottom: 10px;
+  border-radius: 20px;
+}
+
+.productName {
+  font-size: 1.3em;
+  margin-bottom: 5px;
+}
+
+.productPrice {
+  font-size: 1.3em;
 }
 /*# sourceMappingURL=styles.css.map */
