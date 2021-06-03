@@ -1,3 +1,7 @@
+//page principale
+
+
+
 // Declaration des variables
 const product = document.getElementById("product");
 const btnList = document.getElementById("btnList");
@@ -13,12 +17,18 @@ function listProduct(){
             let div = document.createElement("div");
             div.setAttribute("class", "productRef");
             //console.log(div)
+
+            let a = document.createElement("a");
+            a.setAttribute("href", ".produit.html")
+            div.appendChild(a)
+            //console.log(a)
     
             let img = document.createElement("img");
+            img.setAttribute("alt", "photo des teddy bears");
             img.src= data[i].imageUrl;
-            div.appendChild(img);
+            a.appendChild(img);
             //console.log(img)
-    
+
             let spanName = document.createElement("div");
             spanName.setAttribute("class", "productName");
             spanName.innerText = "Name: " + data[i].name;
@@ -48,7 +58,6 @@ listProduct()
 product.className = "styleProduct";
 //console.log(product)
 
-//Affichage du btnWatch qui servira d'acces a la page produit
 
 
 
