@@ -1,3 +1,7 @@
+*{
+    margin: 0;
+    padding: 0;
+}
 .main-Wrapper{ 
     width: 1440px;
     margin: 0 auto;
@@ -5,12 +9,36 @@
     background-color: white;
 }
 header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     height: 150px;
     border: 1px solid blue;
     margin-bottom: 20px;
 }
-
-#btn{
+.titleLogo{
+    margin-left: 20px;
+}
+nav, ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    list-style: none;
+    margin-right: 20px;
+    font-size: 1.1em;
+    font-weight: bold;
+     li{
+         margin-left: 40px;
+     }
+      a{
+          text-decoration: none;
+      }
+}
+a:hover{
+    color:cornflowerblue;
+}
+#btnList{
     width: 120px;
     background-color: cornflowerblue;
     border-radius: 30px;
@@ -21,7 +49,6 @@ header{
     font-weight: bold;
     cursor: pointer;
 }
-
 .styleProduct{
     display: flex;
     flex-direction: row;
@@ -30,13 +57,12 @@ header{
     height: auto;
     width: 100%;
 }
-
 .productRef{
-    border-radius: 20px;
+    border-radius: 30px;
     margin-bottom: 50px;
     background-color: rgba(169, 169, 169, 0.6);
     padding: 20px;
-
+    width: 650px;
 }
 img{
     width: 650px;
@@ -44,14 +70,22 @@ img{
     object-fit: cover;
     margin-bottom: 10px;
     border-radius: 20px;
-    
 }
-
 .productName{
     font-size: 1.3em;
     margin-bottom: 5px;
 }
 .productPrice{
     font-size: 1.3em;
+    margin-bottom: 10px;
 }
+#btnWatch{
+    width: 100px;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+
 
