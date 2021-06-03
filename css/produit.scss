@@ -1,1 +1,42 @@
 // Produit styles
+
+*{
+    margin: 0;
+    padding: 0;
+}
+.main-Wrapper{ 
+    width: 1440px;
+    margin: 0 auto;
+    height: auto;
+    background-color: white;
+}
+header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 150px;
+    border: 1px solid blue;
+    margin-bottom: 20px;
+}
+.titleLogo{
+    margin-left: 20px;
+}
+nav, ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    list-style: none;
+    margin-right: 20px;
+    font-size: 1.1em;
+    font-weight: bold;
+     li{
+         margin-left: 40px;
+     }
+      a{
+          text-decoration: none;
+      }
+}
+a:hover{
+    color:cornflowerblue;
+}
