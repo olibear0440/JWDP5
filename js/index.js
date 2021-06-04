@@ -11,9 +11,11 @@ function listProduct() {
   fetch("http://localhost:3000/api/teddies")
     .then((res) => res.json())
     .then((data) => {
+      //console.log(data)
       for (let i = 0; i < data.length; i++) {
         let div = document.createElement("div");
         div.setAttribute("class", "productRef");
+        product.appendChild(div)
         //console.log(div)
 
         /*let id = document.createElement("p");
@@ -48,14 +50,7 @@ function listProduct() {
         btn.innerText = "Watch";
         div.appendChild(btn);
         //console.log(btn)
-
-        product.appendChild(div);
-        //console.log(product)
       }
-      
     });
 }
 listProduct();
-
-
-
