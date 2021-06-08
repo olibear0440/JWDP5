@@ -1,8 +1,9 @@
 //page principale
 
 // Declaration des variables
-const product = document.getElementById("product");
-const btnList = document.getElementById("btnList");
+
+let btnList = null;//document.getElementById("btnList");
+let product = null;//document.getElementById("product");
 
 // Récuperation des donnees api
 // Creation des éléments et leurs attributs
@@ -15,9 +16,9 @@ function listProduct() {
       for (let i = 0; i < data.length; i++) {
         let div = document.createElement("div");
         div.setAttribute("class", "productRef");
-        product.appendChild(div)
         //console.log(div)
-
+        product.appendChild(div)
+        console.log(product)
         /*let id = document.createElement("p");
         id = data[i]._id;
         //console.log(id);*/
@@ -26,6 +27,7 @@ function listProduct() {
         a.setAttribute("href", "../html/produit.html?id=" + data[i]._id);
         div.appendChild(a);
         //console.log(a)
+        
 
         let img = document.createElement("img");
         img.setAttribute("alt", "photo des teddy bears");
@@ -50,7 +52,14 @@ function listProduct() {
         btn.innerText = "Watch";
         div.appendChild(btn);
         //console.log(btn)
+        
       }
     });
 }
-listProduct();
+
+window.onload = function()
+{
+  btnList = document.getElementById("btnList");
+  product = document.getElementById("product");
+  listProduct();
+}
