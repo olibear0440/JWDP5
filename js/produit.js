@@ -7,23 +7,21 @@ let id = urlParams.get("id");
 //console.log(id)
 let product = null;
 
-function addProduct()
-{
-  
-}
+function addProduct() {}
 
 //-----------------------recuperation du produit (par id) depuis api
 //----creation des divs et affichage img, name, price, description, colors (form)
 
-function loadProduct()
-{
-  fetch("http://localhost:3000/api/teddies/"+id)
+function loadProduct() {
+  fetch("http://localhost:3000/api/teddies/" + id)
     .then((res) => res.json())
     .then((idProd) => {
       product = idProd;
-      //console.log(data)
-      //let idProd = data.find((element) => element._id === id);
-      //console.log(idProd)
+      //console.log(product)
+
+      /*let idProd = data.find((element) => element._id === id);
+      console.log(idProd)*/
+
       let productPage = document.getElementById("productPage");
       //console.log(productPage)
 
@@ -55,49 +53,56 @@ function loadProduct()
       productRef.appendChild(descript);
       //console.log(div)
 
-// boucle for pour lister les couleurs sans "undefind"
-        let colorList = document.getElementById("colorList");
-        function colorChoice(){
-          for(let i=0; i<idProd.colors.length; i++)
-          {
+      // boucle for pour lister les couleurs sans "undefind"
+      let colorList = document.getElementById("colorList");
+      //console.log(colorList)
+
+      function colorOptions() {
+        for (let i = 0; i < idProd.colors.length; i++) {
           colorList.options.add(new Option(idProd.colors[i]));
-          }
         }
-        colorChoice()
-
-
-  //----------------------------------Le panier
-  //----------------------------------btnPurchase
-      let purchaseBtn = document.getElementById("purchaseBtn")
-      //console.log(purchaseBtn)
-      purchaseBtn.addEventListener("click", function(e){
-      
-      let productValue = {
-      spanName: idProd.name,
-      description: idProd.description,
-      color: colorChoice(idProd.colors),
-      price: idProd.price,
-      imageUrl: idProd.imageUrl,
-      quantité: 1
       }
-      console.log(productValue)
-})
+      colorOptions();
 
-      
-  });
+      //----------------------------------Le panier
+      //----------------------------------btnPurchase
+      let purchaseBtn = document.getElementById("purchaseBtn");
+      //console.log(purchaseBtn)
+      purchaseBtn.addEventListener("click", function (e) {
+        let productValue = {
+          spanName: idProd.name,
+          description: idProd.description,
+          price: idProd.price,
+          imageUrl: idProd.imageUrl,
+          quantité: 1,
+          colors: idProd.colors,
+        };
+        //console.log(productValue)
+
+        //-----------------------Stocker les valeurs de "productValue dans le Local storage----------------
+        //declaration des valeurs
+        let productLocalStorage = JSON.parse(localStorage.getItem("panier"));
+        //console.log(productLocalStorage)
+
+        //--------creer fonction pour eviter les repetitions
+        function pushProductLocalStorage() {
+          productLocalStorage.push(productValue);
+          localStorage.setItem("panier", JSON.stringify(productLocalStorage));
+        }
+        //pushProductLocalStorage()
+
+        if (productLocalStorage) {
+          pushProductLocalStorage();
+          //console.log(productLocalStorage)
+        } else {
+          productLocalStorage = [];
+          pushProductLocalStorage();
+          //console.log(productLocalStorage)
+        }
+      });
+    });
 }
 
-
-
-
-
-
-
-
-
-
-
-window.onload = function()
-{
+window.onload = function () {
   loadProduct();
-}
+};
