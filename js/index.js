@@ -18,7 +18,7 @@ function listProduct() {
         div.setAttribute("class", "productRef");
         //console.log(div)
         product.appendChild(div)
-        console.log(product)
+        //console.log(product)
         /*let id = document.createElement("p");
         id = data[i]._id;
         //console.log(id);*/
