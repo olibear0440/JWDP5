@@ -1,15 +1,13 @@
 //------------------------------------Produit
 
-//--------------------------------recuperer l'url
+//--------------------------------recuperer l'url----------------------------
 let urlParams = new URLSearchParams(window.location.search);
 //console.log(urlParams)
 let id = urlParams.get("id");
 //console.log(id)
 let product = null;
 
-function addProduct() {}
-
-//-----------------------recuperation du produit (par id) depuis api
+//-----------------------recuperation du produit (par id) depuis api--------------
 //----creation des divs et affichage img, name, price, description, colors (form)
 
 function loadProduct() {
@@ -43,7 +41,9 @@ function loadProduct() {
 
       let price = document.createElement("div");
       price.setAttribute("class", "productPrice");
-      price.innerText = "Price: " + idProd.price + "€";
+      let p = idProd.price;
+      p = (Math.round(p) / 100).toFixed(2);
+      price.innerText = "Price: " + p + "€";
       productRef.appendChild(price);
       //console.log(div)
 
@@ -57,25 +57,23 @@ function loadProduct() {
       let colorList = document.getElementById("colorList");
       //console.log(colorList)
 
-      function colorOptions() {
-        for (let i = 0; i < idProd.colors.length; i++) {
-          colorList.options.add(new Option(idProd.colors[i]));
-        }
+      for (let i = 0; i < idProd.colors.length; i++) {
+        colorList.options.add(new Option(idProd.colors[i]));
       }
-      colorOptions();
 
-      //----------------------------------Le panier
+      //----------------------------------Le panier--------------------
       //----------------------------------btnPurchase
       let purchaseBtn = document.getElementById("purchaseBtn");
       //console.log(purchaseBtn)
       purchaseBtn.addEventListener("click", function (e) {
         let productValue = {
+          id: idProd._id,
           spanName: idProd.name,
           description: idProd.description,
-          price: idProd.price,
+          price: idProd.price / 100,
           imageUrl: idProd.imageUrl,
           quantité: 1,
-          colors: idProd.colors,
+          colors: document.getElementById("colorList").value,
         };
         //console.log(productValue)
 
@@ -84,7 +82,7 @@ function loadProduct() {
         let productLocalStorage = JSON.parse(localStorage.getItem("panier"));
         //console.log(productLocalStorage)
 
-        //--------creer fonction pour eviter les repetitions
+        //--------creer fonction pour eviter les repetitions-------------------------
         function pushProductLocalStorage() {
           productLocalStorage.push(productValue);
           localStorage.setItem("panier", JSON.stringify(productLocalStorage));
@@ -99,6 +97,7 @@ function loadProduct() {
           pushProductLocalStorage();
           //console.log(productLocalStorage)
         }
+        window.location.href = "panier.html";
       });
     });
 }

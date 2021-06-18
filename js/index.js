@@ -43,7 +43,9 @@ function listProduct() {
 
         let price = document.createElement("div");
         price.setAttribute("class", "productPrice");
-        price.innerText = "Price: " + data[i].price + "€";
+        let p = data[i].price;
+        p = (Math.round(p) / 100).toFixed(2);
+        price.innerText = "Price: " + p + "€";
         div.appendChild(price);
         //console.log(price)
 

@@ -4,7 +4,7 @@
 
 //declaration des valeurs
 let productLocalStorage = JSON.parse(localStorage.getItem("panier"));
-//console.log(productLocalStorage)
+//console.log(productLocalStorage);
 
 let purchasePage = document.getElementById("purchasePage");
 //console.log(purchasePage);
@@ -16,7 +16,6 @@ purchaseEmpty.setAttribute("class", "purchaseEmpty");
 //console.log(purchasePage)
 let purchaseEmptyText = document.createElement("div");
 purchaseEmptyText.setAttribute("class", "purchaseEmptyText");
-purchaseEmptyText.innerHTML = "Your purchase is empty";
 //console.log(purchaseEmpty)
 purchaseEmpty.appendChild(purchaseEmptyText);
 //console.log(purchasePage)
@@ -30,16 +29,22 @@ if (productLocalStorage === null || productLocalStorage == 0) {
 } else {
   //si panier rempli
   //creer une boucle for pour afficher chaque teddy avec ses valeurs
+  afficherPanier();
+}
+
+function afficherPanier() {
   let divSection = [];
 
   for (k = 0; k < productLocalStorage.length; k++) {
+    let p = productLocalStorage[k].price;
+    p = (Math.round(p * 100) / 100).toFixed(2);
     divSection =
       divSection +
       `
     <div class="purchaseRecap">
     <div>1 - Teddy : ${productLocalStorage[k].spanName} </div>
     <div>Color : ${productLocalStorage[k].colors}</div>
-    <div>Price : ${productLocalStorage[k].price} € <button class="btnDelete">Delete<button></div>
+    <div>Price : ${p} € <button class="btnDelete">Delete<button></div>
     </div>
     `;
   }
@@ -48,15 +53,40 @@ if (productLocalStorage === null || productLocalStorage == 0) {
   }
 }
 
-//-------------------------------bouton suppression d'un article-------------------------------------
+//------------------effacer un produit du panier----------------------------------------------
+
 let btnDelete = document.getElementsByClassName("btnDelete");
 //console.log(btnDelete)
+
+// chercher les id de chaque btnDelete
+for (let l = 0; l < btnDelete.length; l++) {
+  let idBtnDelete = btnDelete[l];
+  //console.log(idBtnDelete)
+  idBtnDelete.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    //chercher id du localstorage a supprimer
+    let idProductLocalStorage = productLocalStorage[l].id;
+    //console.log(idProductLocalStorage)
+
+    productLocalStorage = productLocalStorage.filter(
+      (el) => el.id !== idProductLocalStorage
+    );
+    //console.log(productLocalStorage)
+
+    //envoi de la variable dans le local storage apres l'avoir transformé au format json
+    localStorage.setItem("panier", JSON.stringify(productLocalStorage));
+
+    //fenetre d'alerte
+    alert("Your product has been removed");
+    window.location.href("panier.html");
+  });
+}
 
 //----------------------btn vider entierement le panier-----------------------------------------------
 
 //creer le html
-let btnDeleteAll = `
-<button id="btnDeleteAll">Delete your purchase<button>`;
+let btnDeleteAll = '<button id="btnDeleteAll">Delete your purchase<button>';
 //console.log(purchasePage)
 
 //inserer le bouton dans le html
@@ -78,21 +108,23 @@ purchaseBtnDeleteAll.addEventListener("click", function () {
 
 //---------------addition montant total du panier---------------------------------------------------
 let totalAmount = [];
-for (let m = 0; m < productLocalStorage.length; m++) {
-  //console.log(productLocalStorage)
-  //creer variable dans laquelle on met tt les prix
-  let priceByProduct = productLocalStorage[m].price;
+if (productLocalStorage !== null) {
+  for (let m = 0; m < productLocalStorage.length; m++) {
+    //console.log(productLocalStorage)
+    //creer variable dans laquelle on met tt les prix
+    let priceByProduct = productLocalStorage[m].price;
 
-  //mettre dans array totalAmount les prix
-  totalAmount.push(priceByProduct);
-  //console.log(priceByProduct)
-  //console.log(totalAmount)
+    //mettre dans array totalAmount les prix
+    totalAmount.push(priceByProduct);
+    //console.log(priceByProduct)
+    //console.log(totalAmount)
+  }
 }
-
 // methode pour faire les additions (reduce)
 let reducer = (accumulator, currentValue) => accumulator + currentValue;
 //console.log(reducer)
 let totalPrice = totalAmount.reduce(reducer, 0);
+totalPrice = (Math.round(totalPrice * 100) / 100).toFixed(2);
 //console.log(totalPrice)
 
 // prix total a afficher dans html
@@ -155,61 +187,120 @@ confirmForm.addEventListener("click", function () {
     firstName: document.getElementById("firstName").value,
     lastName: document.getElementById("lastName").value,
     email: document.getElementById("email").value,
-    address: document.getElementById("adress").value,
+    adress: document.getElementById("adress").value,
     city: document.getElementById("city").value,
   };
   //console.log(formValue)
   //------------------------------controler la saisie du formulaire-----------------------------
 
-  // creer une fonction et controler la sisie de l'utilisateur avec la method regex
+  // creer une fonction et controler la saisie de l'utilisateur avec la method regex
   //1.creer une fonction avec les valeurs du regex a reutiliser
 
-  //----------------------------pour le prenom
-  function controlFirstName(){
+  //fonction textAlert pour ne pas avoir a repeter
+  let textAlert = (value) => {
+    return value + " : Please enter valid informations";
+  };
+
+  //fonction regEx first name, last name pour ne pas avoir a repeter
+  let regExNameCity = (value) => {
+    return /^([A-Za-z]{3,20})?([-]{0,1})?([A-Za-z]{3,20})$/.test(value);
+  };
+  //fonctionr regEx email pour ne pas avoir a repeter (trouver sur le site regEx.com)
+  let regExMail = (value) => {
+    return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value);
+  };
+  //fonction regEx adress pour ne pas avoir a repeter
+  let regExAdress = (value) => {
+    return /^[A-Za-z0-9\s]{5,50}$/.test(value);
+  };
+  
+
+
+
+  //----------------------------pour le first name-------------------------
+  function controlFirstName() {
     let controlFormFirstName = formValue.firstName;
     //console.log(controlForm)
-    if (/^[A-Za-z]{3,20}$/.test(controlFormFirstName)) {
+    if (regExNameCity(controlFormFirstName)) {
       //console.log("OK")
       return true;
     } else {
       //console.log("KO")
-      alert("Please enter valid informations");
+      alert(textAlert("First Name"));
       return false;
     }
   }
-    
-  if (controlFirstName()) {
-    //mettre l'objet formValue sous forme de key, regarder dans le local storage
-    localStorage.setItem("formValue", JSON.stringify(formValue));
-    //console.log(controlFormRegex)
-  } else {
-    //console.log(controlFormRegex)
-    alert("Please enter valid informations");
-  }
-
-  //-----------------------------------pour le lastName
-  /*function controlFormRegexLastName() {
-    let controlFormName = formValue.lastName;
+  //----------------------------pour le last name----------------------------
+  function controlLastName() {
+    let controlFormLastName = formValue.lastName;
     //console.log(controlForm)
-
-    if (/^[A-Za-z]{3,20}$/.test(controlFormName)) {
+    if (regExNameCity(controlFormLastName)) {
       //console.log("OK")
       return true;
     } else {
       //console.log("KO")
-      alert("please enter valid informations");
+      alert(textAlert("Last Name"));
       return false;
     }
   }
-  if (controlFormRegexFirstName()) {
+  //----------------------------pour l'email---------------------------------
+  function controlMail() {
+    let controlFormEmail = formValue.email;
+    //console.log(controlForm)
+    if (regExMail(controlFormEmail)) {
+      //console.log("OK")
+      return true;
+    } else {
+      //console.log("KO")
+      alert(textAlert("Email is not valid"));
+      return false;
+    }
+  }
+  //------------------------pour adress--------------------------------
+
+  function controlAdress() {
+    let controlFormAdress = formValue.adress;
+    //console.log(controlForm)
+    if (regExAdress(controlFormAdress)) {
+      //console.log("OK")
+      return true;
+    } else {
+      //console.log("KO")
+      alert(textAlert("Your adress is not valid"));
+      return false;
+    }
+  }
+
+  //----------------------------pour le first name-------------------------
+  function controlCity() {
+    let controlFormCity = formValue.city;
+    //console.log(controlForm)
+    if (regExNameCity(controlFormCity)) {
+      //console.log("OK")
+      return true;
+    } else {
+      //console.log("KO")
+      alert(textAlert("City"));
+      return false;
+    }
+}
+
+
+  //--------------------- envoi du formulaire au local storage
+  if (
+    controlFirstName() &&
+    controlLastName() &&
+    controlMail() &&
+    controlAdress() &&
+    controlCity()
+  ) {
     //mettre l'objet formValue sous forme de key, regarder dans le local storage
     localStorage.setItem("formValue", JSON.stringify(formValue));
-    //console.log(controlFormRegex)
+    //console.log(controlFirstName)
   } else {
-    //console.log(controlFormRegex)
     alert("Please enter valid informations");
   }
-*/
+
   //mettre les produits du local storage + formValue dans un objet a envoyer au serveur
   let aEnvoyer = {
     productLocalStorage,
@@ -220,22 +311,29 @@ confirmForm.addEventListener("click", function () {
   // envoi de l'objet aEnvoyer vers le serveur
 });
 
-/*
 //------------------------garder les saisies du formulaire actif si changement de page
-
 // recup la key du local storage et mettre dans une variable
-let infoLocalStorage = localStorage.getItem("formValue")
+let infoLocalStorage = localStorage.getItem("formValue");
 //console.log(infoLocalStorage)
 
 //convertir la chaine de caractere en objet
-let infoLocalStorageCaractere = JSON.parse(infoLocalStorage)
+let infoLocalStorageCaractere = JSON.parse(infoLocalStorage);
 //console.log(infoLocalStorageCaractere)
 
 //prendre chaque value du local storage dans les champs du formulaire
-document.getElementById("firstName").setAttribute("value", infoLocalStorageCaractere.firstName)
-document.getElementById("lastName").setAttribute("value", infoLocalStorageCaractere.lastName)
-document.getElementById("email").setAttribute("value", infoLocalStorageCaractere.email)
-document.getElementById("adress").setAttribute("value", infoLocalStorageCaractere.adress)
-document.getElementById("city").setAttribute("value", infoLocalStorageCaractere.city)
-*/
+document
+  .getElementById("firstName")
+  .setAttribute("value", infoLocalStorageCaractere.firstName);
+document
+  .getElementById("lastName")
+  .setAttribute("value", infoLocalStorageCaractere.lastName);
+document
+  .getElementById("email")
+  .setAttribute("value", infoLocalStorageCaractere.email);
+document
+  .getElementById("adress")
+  .setAttribute("value", infoLocalStorageCaractere.adress);
+document
+  .getElementById("city")
+  .setAttribute("value", infoLocalStorageCaractere.city);
 //--------------------------------------------------------------------------------------
