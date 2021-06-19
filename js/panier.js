@@ -154,16 +154,16 @@ let formulaireHtml = () => {
   <input type="text" id="firstName" name="firstName" required><br>
 
   <label for="lastName">Last name :</label>
-  <input type="text" id="lastName" name="LastName" required><br>
+  <input type="text" id="lastName" name="lastName" required><br>
 
   <label for="email">Email :</label>
   <input type="email" id="email" name="email" required><br>  
 
-  <label for="adress">Adress :</label>
-  <input type="text" id="adress" name="Adress" required><br>
+  <label for="address">Address :</label>
+  <input type="text" id="address" name="address" required><br>
 
   <label for="city">City :</label>
-  <input type="text" id="city" name="City" required><br> 
+  <input type="text" id="city" name="city" required><br> 
 
   <button id="confirmForm" type="submit" name="confirmForm">
    Confirm my order
@@ -183,14 +183,14 @@ let confirmForm = document.getElementById("confirmForm");
 // creer l'evenement sur le click du btn confirm my order
 confirmForm.addEventListener("click", function () {
   //mettre les values du formulaire dans un objet
-  let formValue = {
+  let contact = {
     firstName: document.getElementById("firstName").value,
     lastName: document.getElementById("lastName").value,
     email: document.getElementById("email").value,
-    adress: document.getElementById("adress").value,
+    address: document.getElementById("address").value,
     city: document.getElementById("city").value,
   };
-  //console.log(formValue)
+  //console.log(contact)
   //------------------------------controler la saisie du formulaire-----------------------------
 
   // creer une fonction et controler la saisie de l'utilisateur avec la method regex
@@ -209,17 +209,14 @@ confirmForm.addEventListener("click", function () {
   let regExMail = (value) => {
     return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value);
   };
-  //fonction regEx adress pour ne pas avoir a repeter
-  let regExAdress = (value) => {
+  //fonction regEx address pour ne pas avoir a repeter
+  let regExAddress = (value) => {
     return /^[A-Za-z0-9\s]{5,50}$/.test(value);
   };
-  
-
-
 
   //----------------------------pour le first name-------------------------
   function controlFirstName() {
-    let controlFormFirstName = formValue.firstName;
+    let controlFormFirstName = contact.firstName;
     //console.log(controlForm)
     if (regExNameCity(controlFormFirstName)) {
       //console.log("OK")
@@ -232,7 +229,7 @@ confirmForm.addEventListener("click", function () {
   }
   //----------------------------pour le last name----------------------------
   function controlLastName() {
-    let controlFormLastName = formValue.lastName;
+    let controlFormLastName = contact.lastName;
     //console.log(controlForm)
     if (regExNameCity(controlFormLastName)) {
       //console.log("OK")
@@ -245,7 +242,7 @@ confirmForm.addEventListener("click", function () {
   }
   //----------------------------pour l'email---------------------------------
   function controlMail() {
-    let controlFormEmail = formValue.email;
+    let controlFormEmail = contact.email;
     //console.log(controlForm)
     if (regExMail(controlFormEmail)) {
       //console.log("OK")
@@ -256,24 +253,24 @@ confirmForm.addEventListener("click", function () {
       return false;
     }
   }
-  //------------------------pour adress--------------------------------
+  //------------------------pour address--------------------------------
 
-  function controlAdress() {
-    let controlFormAdress = formValue.adress;
+  function controlAddress() {
+    let controlFormAddress = contact.address;
     //console.log(controlForm)
-    if (regExAdress(controlFormAdress)) {
+    if (regExAddress(controlFormAddress)) {
       //console.log("OK")
       return true;
     } else {
       //console.log("KO")
-      alert(textAlert("Your adress is not valid"));
+      alert(textAlert("Your address is not valid"));
       return false;
     }
   }
 
   //----------------------------pour le first name-------------------------
   function controlCity() {
-    let controlFormCity = formValue.city;
+    let controlFormCity = contact.city;
     //console.log(controlForm)
     if (regExNameCity(controlFormCity)) {
       //console.log("OK")
@@ -283,37 +280,56 @@ confirmForm.addEventListener("click", function () {
       alert(textAlert("City"));
       return false;
     }
-}
-
+  }
 
   //--------------------- envoi du formulaire au local storage
   if (
     controlFirstName() &&
     controlLastName() &&
     controlMail() &&
-    controlAdress() &&
+    controlAddress() &&
     controlCity()
   ) {
     //mettre l'objet formValue sous forme de key, regarder dans le local storage
-    localStorage.setItem("formValue", JSON.stringify(formValue));
+    localStorage.setItem("contact", JSON.stringify(contact));
     //console.log(controlFirstName)
+
+    //mettre les produits du local storage + formValue dans un objet a envoyer au serveur
+    let aEnvoyer = {
+      productLocalStorage,
+      contact,
+    };
+    //console.log(aEnvoyer)
+    //-------------------------envoi de l'objet aEnvoyer vers le serveur----------
+    sendServer(aEnvoyer);
   } else {
     alert("Please enter valid informations");
   }
-
-  //mettre les produits du local storage + formValue dans un objet a envoyer au serveur
-  let aEnvoyer = {
-    productLocalStorage,
-    formValue,
-  };
-  //console.log(aEnvoyer)
-
-  // envoi de l'objet aEnvoyer vers le serveur
 });
+
+function sendServer(aEnvoyer) {
+  let e = fetch("http://localhost:3000/api/teddies/order", {
+    method: "POST",
+    body: JSON.stringify(aEnvoyer),
+    headers: {
+      "Content-type": "application/json",
+    },
+  });
+  //console.log(e)
+
+  e.then(function (response) {
+    //console.log(response)
+    return response.json();
+    
+  });
+  e.then(function (data) {
+    console.log("POST request response data", data);
+  });
+}
 
 //------------------------garder les saisies du formulaire actif si changement de page
 // recup la key du local storage et mettre dans une variable
-let infoLocalStorage = localStorage.getItem("formValue");
+let infoLocalStorage = localStorage.getItem("contact");
 //console.log(infoLocalStorage)
 
 //convertir la chaine de caractere en objet
@@ -331,8 +347,8 @@ document
   .getElementById("email")
   .setAttribute("value", infoLocalStorageCaractere.email);
 document
-  .getElementById("adress")
-  .setAttribute("value", infoLocalStorageCaractere.adress);
+  .getElementById("address")
+  .setAttribute("value", infoLocalStorageCaractere.address);
 document
   .getElementById("city")
   .setAttribute("value", infoLocalStorageCaractere.city);

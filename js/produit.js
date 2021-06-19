@@ -11,7 +11,7 @@ let product = null;
 //----creation des divs et affichage img, name, price, description, colors (form)
 
 function loadProduct() {
-  fetch("http://localhost:3000/api/teddies/" + id)
+    fetch("http://localhost:3000/api/teddies/" + id)
     .then((res) => res.json())
     .then((idProd) => {
       product = idProd;

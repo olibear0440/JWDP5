@@ -24,13 +24,16 @@ header {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  height: 150px;
-  border: 1px solid blue;
-  margin-bottom: 20px;
+  height: 170px;
+  margin-bottom: 50px;
+  background-color: #f3e9f1;
 }
 
-.titleLogo {
+.logo {
+  border-radius: 0;
   margin-left: 20px;
+  height: 100px;
+  width: 160px;
 }
 
 nav, ul {
@@ -76,6 +79,7 @@ a:hover {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
+  margin-bottom: 20px;
 }
 
 img {
@@ -88,6 +92,31 @@ img {
   border-radius: 20px;
 }
 
+form {
+  margin-bottom: 20px;
+}
+
+.colorLabel {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+#colorList {
+  margin-top: 20px;
+  width: 200px;
+  height: 30px;
+}
+
+#purchaseBtn {
+  height: 40px;
+  border-radius: 20px;
+  background-color: #f3e9f1;
+  border: 2px solid #f3e9f1;
+  margin-bottom: 40px;
+  font-size: 1em;
+  font-weight: bold;
+}
+
 #productRef {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -96,5 +125,55 @@ img {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+}
+
+.productName {
+  margin-bottom: 15px;
+  font-size: 1em;
+}
+
+.productPrice {
+  margin-bottom: 15px;
+  font-size: 1em;
+}
+
+.productDescript {
+  margin-bottom: 15px;
+  font-size: 1em;
+}
+
+footer {
+  height: 170px;
+  background-color: #f3e9f1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.Rsociaux {
+  height: 70px;
+  width: 400px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 /*# sourceMappingURL=produit.css.map */

@@ -24,13 +24,16 @@ header {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  height: 150px;
-  border: 1px solid blue;
-  margin-bottom: 20px;
+  height: 170px;
+  margin-bottom: 40px;
+  background-color: #f3e9f1;
 }
 
-.titleLogo {
+.logo {
+  border-radius: 0;
   margin-left: 20px;
+  height: 100px;
+  width: 160px;
 }
 
 nav, ul {
@@ -45,7 +48,7 @@ nav, ul {
       -ms-flex-pack: end;
           justify-content: flex-end;
   list-style: none;
-  margin-right: 20px;
+  margin-right: 50px;
   font-size: 1.1em;
   font-weight: bold;
 }
@@ -60,18 +63,6 @@ nav a, ul a {
 
 a:hover {
   color: cornflowerblue;
-}
-
-#btnList {
-  width: 120px;
-  background-color: cornflowerblue;
-  border-radius: 30px;
-  padding: 10px;
-  text-align: center;
-  margin-bottom: 20px;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
 }
 
 .styleProduct {
@@ -118,11 +109,38 @@ img {
   margin-bottom: 10px;
 }
 
-#btnWatch {
-  width: 100px;
-  padding: 5px;
-  border-radius: 5px;
-  font-size: 1.2em;
-  cursor: pointer;
+footer {
+  height: 170px;
+  background-color: #f3e9f1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.Rsociaux {
+  height: 70px;
+  width: 400px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 /*# sourceMappingURL=styles.css.map */

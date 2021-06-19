@@ -9,7 +9,7 @@ let product = null;//document.getElementById("product");
 // Creation des éléments et leurs attributs
 // Stockage dans une fonction avec boucle
 function listProduct() {
-  fetch("http://localhost:3000/api/teddies")
+  fetch("http://localhost:3000/api/teddies/")
     .then((res) => res.json())
     .then((data) => {
       //console.log(data)
@@ -19,9 +19,6 @@ function listProduct() {
         //console.log(div)
         product.appendChild(div)
         //console.log(product)
-        /*let id = document.createElement("p");
-        id = data[i]._id;
-        //console.log(id);*/
 
         let a = document.createElement("a");
         a.setAttribute("href", "../html/produit.html?id=" + data[i]._id);
@@ -48,13 +45,6 @@ function listProduct() {
         price.innerText = "Price: " + p + "€";
         div.appendChild(price);
         //console.log(price)
-
-        let btn = document.createElement("button");
-        btn.setAttribute("id", "btnWatch");
-        btn.innerText = "Watch";
-        div.appendChild(btn);
-        //console.log(btn)
-        
       }
     });
 }
