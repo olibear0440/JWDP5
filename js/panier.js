@@ -65,13 +65,14 @@ for (let l = 0; l < btnDelete.length; l++) {
   idBtnDelete.addEventListener("click", function (event) {
     event.preventDefault();
 
+    productLocalStorage.splice(l, 1);
     //chercher id du localstorage a supprimer
-    let idProductLocalStorage = productLocalStorage[l].id;
+    //let idProductLocalStorage = productLocalStorage[l].id;
     //console.log(idProductLocalStorage)
 
-    productLocalStorage = productLocalStorage.filter(
-      (el) => el.id !== idProductLocalStorage
-    );
+    //productLocalStorage = productLocalStorage.filter(
+    //(el) => el.id !== idProductLocalStorage
+    //);
     //console.log(productLocalStorage)
 
     //envoi de la variable dans le local storage apres l'avoir transformé au format json
@@ -79,7 +80,7 @@ for (let l = 0; l < btnDelete.length; l++) {
 
     //fenetre d'alerte
     alert("Your product has been removed");
-    window.location.href("panier.html");
+    window.location.href = "panier.html";
   });
 }
 
@@ -292,18 +293,30 @@ confirmForm.addEventListener("click", function () {
   ) {
     //mettre l'objet formValue sous forme de key, regarder dans le local storage
     localStorage.setItem("contact", JSON.stringify(contact));
-    //console.log(controlFirstName)
+    //console.log(contact)
+    //mettre le prix total (variable ligne 134) dans le local storage pour pouvoir le recuperer et l'afficher sur la page confirmation
+    localStorage.setItem("totalPrice", JSON.stringify(totalPrice));
 
     //mettre les produits du local storage + formValue dans un objet a envoyer au serveur
+    let productIds = [];
+    for (let n = 0; n < productLocalStorage.length; n++) {
+      let idByProduct = productLocalStorage[n].id;
+      //console.log(idByProduct)
+      productIds.push(idByProduct);
+      //console.log(productIds);
+    }
+    //
+
     let aEnvoyer = {
-      productLocalStorage,
-      contact,
+      products: productIds,
+      contact: contact,
+      prixTotal: totalPrice
     };
     //console.log(aEnvoyer)
     //-------------------------envoi de l'objet aEnvoyer vers le serveur----------
     sendServer(aEnvoyer);
   } else {
-    alert("Please enter valid informations");
+    //alert("Please enter valid informations");
   }
 });
 
@@ -314,17 +327,19 @@ function sendServer(aEnvoyer) {
     headers: {
       "Content-type": "application/json",
     },
-  });
-  //console.log(e)
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("POST request response data", data); //reponse du serveur dans la console (non presente dans le local storage)
 
-  e.then(function (response) {
-    //console.log(response)
-    return response.json();
-    
-  });
-  e.then(function (data) {
-    console.log("POST request response data", data);
-  });
+      //----------------recuperer la reponse du serveur dans le local storage------------------------------------
+      localStorage.setItem("reponseServeur", JSON.stringify(data));
+      console.log(data)
+
+      //----------------Envoi de la reponse du serveur vers la page confirmation commande------------------
+      window.location = "confirmation.html";
+
+    });
 }
 
 //------------------------garder les saisies du formulaire actif si changement de page

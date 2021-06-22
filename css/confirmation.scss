@@ -1,1 +1,66 @@
 //confirmation styles
+*{
+    margin: 0;
+    padding: 0;
+}
+.main-Wrapper{ 
+    width: 1440px;
+    margin: 0 auto;
+    height: auto;
+    background-color: white;
+}
+header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 170px;
+    margin-bottom: 40px;
+    background-color: rgb(243, 233, 241);
+}
+.logo{
+    border-radius: 0;
+    margin-left: 20px;
+    height: 100px;
+    width: 160px;
+}
+nav, ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    list-style: none;
+    margin-right: 50px;
+    font-size: 1.1em;
+    font-weight: bold;
+     li{
+         margin-left: 40px;
+     }
+      a{
+          text-decoration: none;
+      }
+}
+a:hover{
+    color:cornflowerblue;
+}
+
+
+
+
+
+
+footer{
+    height: 170px;
+    background-color: rgb(243, 233, 241);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+.Rsociaux{
+    height: 70px;
+    width: 400px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}

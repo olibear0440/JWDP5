@@ -22,6 +22,7 @@ function listProduct() {
 
         let a = document.createElement("a");
         a.setAttribute("href", "../html/produit.html?id=" + data[i]._id);
+        a.setAttribute("title", "Choose your Teddy")
         div.appendChild(a);
         //console.log(a)
         
