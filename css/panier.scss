@@ -1,8 +1,21 @@
-
+@font-face {
+    font-family: 'robotoregular';
+    src: url('Roboto-Regular-webfont.eot');
+    src: url('Roboto-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('Roboto-Regular-webfont.woff2') format('woff2'),
+         url('../fonts/roboto_regular_macroman/Roboto-Regular-webfont.woff') format('woff'),
+         url('Roboto-Regular-webfont.ttf') format('truetype'),
+         url('Roboto-Regular-webfont.svg#robotoregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
 *{
     margin: 0;
     padding: 0;
+    font-family: "robotoregular", Arial, Helvetica, sans-serif;
+
 }
+
 .main-Wrapper{ 
     width: 1440px;
     margin: 0 auto;
@@ -30,7 +43,7 @@ nav, ul{
     justify-content: flex-end;
     list-style: none;
     margin-right: 20px;
-    font-size: 1.1em;
+    font-size: 1.2em;
     font-weight: bold;
      li{
          margin-left: 40px;
@@ -50,9 +63,7 @@ a:hover{
     width: 100%;
     justify-content: center;
 }
-.purchaseEmptyText{
-    background-color: coral;
-}
+
 .purchaseRecap{
     height: 50px;
     display: flex;
@@ -60,6 +71,18 @@ a:hover{
     align-items: center;
     background-color:rgb(231, 189, 174);
     margin-bottom: 20px;
+}
+.priceNbtn{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btnDelete{
+    width: 100px;
+    margin-left: 50px;
+    font-size: 1em;
 }
 .purchaseTotalAmount{
     height: 60px;
@@ -73,8 +96,14 @@ h1{
     margin-bottom: 20px;
 }
 #btnDeleteAll{
-    height: 40px;
+    height: 60px;
+    width: 50%;
     font-size: large;
+    font-size: 1.1em;
+    margin: 50px auto 50px;
+    border-radius: 20px;
+    background-color: #ecd5e8;
+    box-shadow: 1px 1px 1px gray;
 
 }
 .totalAmountHtml{
@@ -99,13 +128,15 @@ form{
 }
 input{
     height: 25px;
+    font-size: 1.1em;
 }
 #address{
     background-color: rgb(230, 209, 202);
 }
 #confirmForm{
-    height: 30px;
+    height: 40px;
     margin-bottom: 20px;
+    font-size: 1.1em;
 }
 footer{
     height: 170px;
@@ -114,12 +145,5 @@ footer{
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-}
-.Rsociaux{
-    height: 70px;
-    width: 400px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    font-size: 1.1em;
 }

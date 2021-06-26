@@ -1,6 +1,15 @@
+@font-face {
+  font-family: 'robotoregular';
+  src: url("Roboto-Regular-webfont.eot");
+  src: url("Roboto-Regular-webfont.eot?#iefix") format("embedded-opentype"), url("Roboto-Regular-webfont.woff2") format("woff2"), url("../fonts/roboto_regular_macroman/Roboto-Regular-webfont.woff") format("woff"), url("Roboto-Regular-webfont.ttf") format("truetype"), url("Roboto-Regular-webfont.svg#robotoregular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
 * {
   margin: 0;
   padding: 0;
+  font-family: "robotoregular", Arial, Helvetica, sans-serif;
 }
 
 .main-Wrapper {
@@ -49,7 +58,7 @@ nav, ul {
           justify-content: flex-end;
   list-style: none;
   margin-right: 20px;
-  font-size: 1.1em;
+  font-size: 1.2em;
   font-weight: bold;
 }
 
@@ -80,10 +89,6 @@ a:hover {
           justify-content: center;
 }
 
-.purchaseEmptyText {
-  background-color: coral;
-}
-
 .purchaseRecap {
   height: 50px;
   display: -webkit-box;
@@ -96,6 +101,28 @@ a:hover {
           align-items: center;
   background-color: #e7bdae;
   margin-bottom: 20px;
+}
+
+.priceNbtn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.btnDelete {
+  width: 100px;
+  margin-left: 50px;
+  font-size: 1em;
 }
 
 .purchaseTotalAmount {
@@ -115,8 +142,15 @@ h1 {
 }
 
 #btnDeleteAll {
-  height: 40px;
+  height: 60px;
+  width: 50%;
   font-size: large;
+  font-size: 1.1em;
+  margin: 50px auto 50px;
+  border-radius: 20px;
+  background-color: #ecd5e8;
+  -webkit-box-shadow: 1px 1px 1px gray;
+          box-shadow: 1px 1px 1px gray;
 }
 
 .totalAmountHtml {
@@ -150,6 +184,7 @@ form {
 
 input {
   height: 25px;
+  font-size: 1.1em;
 }
 
 #address {
@@ -157,8 +192,9 @@ input {
 }
 
 #confirmForm {
-  height: 30px;
+  height: 40px;
   margin-bottom: 20px;
+  font-size: 1.1em;
 }
 
 footer {
@@ -176,23 +212,6 @@ footer {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-}
-
-.Rsociaux {
-  height: 70px;
-  width: 400px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  font-size: 1.1em;
 }
 /*# sourceMappingURL=panier.css.map */

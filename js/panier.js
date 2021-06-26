@@ -1,15 +1,13 @@
-//Panier
+//---affichage des produits dans panier
 
-//------------------affichage des produits dans panier----------------------------------------------
-
-//declaration des valeurs
+//---Conversion du panier au format javascript
 let productLocalStorage = JSON.parse(localStorage.getItem("panier"));
 //console.log(productLocalStorage);
 
 let purchasePage = document.getElementById("purchasePage");
 //console.log(purchasePage);
 
-//-----------------------creer div pour panier vide-----------------------------------------------
+//---creer une page panier vide qui affichera le formulaire, btnDeleteAll, price à 0€
 let purchaseEmpty = document.createElement("div");
 purchaseEmpty.setAttribute("class", "purchaseEmpty");
 //console.log(purchaseEmpty)
@@ -20,7 +18,7 @@ purchaseEmptyText.setAttribute("class", "purchaseEmptyText");
 purchaseEmpty.appendChild(purchaseEmptyText);
 //console.log(purchasePage)
 
-// ---------------------test de panier vide ou pas-------------------------------------------------
+// ---test de panier vide ou non
 if (productLocalStorage === null || productLocalStorage == 0) {
   //si panier vide
   //console.log(purchasePage)
@@ -28,108 +26,106 @@ if (productLocalStorage === null || productLocalStorage == 0) {
   purchasePage.innerHTML = emptyText;
 } else {
   //si panier rempli
-  //creer une boucle for pour afficher chaque teddy avec ses valeurs
   afficherPanier();
 }
 
+//---creer une fonction qui affiche le panier dans le navigateur
 function afficherPanier() {
   let divSection = [];
 
   for (k = 0; k < productLocalStorage.length; k++) {
     let p = productLocalStorage[k].price;
     p = (Math.round(p * 100) / 100).toFixed(2);
+    //console.log(p)
     divSection =
       divSection +
       `
     <div class="purchaseRecap">
-    <div>1 - Teddy : ${productLocalStorage[k].spanName} </div>
-    <div>Color : ${productLocalStorage[k].colors}</div>
-    <div>Price : ${p} € <button class="btnDelete">Delete<button></div>
+    <div class="textName">Teddy : ${productLocalStorage[k].spanName} </div>
+    <div class="textColor">Color : ${productLocalStorage[k].colors}</div>
+    <div class="priceNbtn">Price : ${p} € <button class="btnDelete">Delete<button></div>
     </div>
     `;
+    //console.log(divSection)
   }
   if (k == productLocalStorage.length) {
     purchasePage.innerHTML = divSection;
   }
 }
 
-//------------------effacer un produit du panier----------------------------------------------
-
+//---effacer un produit du panier
 let btnDelete = document.getElementsByClassName("btnDelete");
-//console.log(btnDelete)
+//console.log(btnDelete);
 
-// chercher les id de chaque btnDelete
-for (let l = 0; l < btnDelete.length; l++) {
-  let idBtnDelete = btnDelete[l];
-  //console.log(idBtnDelete)
-  idBtnDelete.addEventListener("click", function (event) {
-    event.preventDefault();
+//---chercher les id de chaque btnDelete, creer l'evevenement au click de suppression, et envoi au local storage avec une alerte
+function supprimerUnArticle() {
+  for (let l = 0; l < btnDelete.length; l++) {
+    let idBtnDelete = btnDelete[l];
+    //console.log(idBtnDelete)
+    idBtnDelete.addEventListener("click", function (event) {
+      event.preventDefault();
+      productLocalStorage.splice(l, 1);
 
-    productLocalStorage.splice(l, 1);
-    //chercher id du localstorage a supprimer
-    //let idProductLocalStorage = productLocalStorage[l].id;
-    //console.log(idProductLocalStorage)
+      //envoi dans le local storage apres l'avoir transformé au format json
+      localStorage.setItem("panier", JSON.stringify(productLocalStorage));
 
-    //productLocalStorage = productLocalStorage.filter(
-    //(el) => el.id !== idProductLocalStorage
-    //);
-    //console.log(productLocalStorage)
-
-    //envoi de la variable dans le local storage apres l'avoir transformé au format json
-    localStorage.setItem("panier", JSON.stringify(productLocalStorage));
-
-    //fenetre d'alerte
-    alert("Your product has been removed");
-    window.location.href = "panier.html";
-  });
+      //fenetre d'alerte
+      alert("Your product has been removed");
+      window.location.href = "panier.html";
+    });
+  }
 }
+supprimerUnArticle();
 
-//----------------------btn vider entierement le panier-----------------------------------------------
-
-//creer le html
+//---btn vider entierement le panier
+//creer le html, afficher le btnDeleteAll
 let btnDeleteAll = '<button id="btnDeleteAll">Delete your purchase<button>';
 //console.log(purchasePage)
-
-//inserer le bouton dans le html
 purchasePage.insertAdjacentHTML("beforeend", btnDeleteAll);
 //console.log(purchasePage)
-
 let purchaseBtnDeleteAll = document.getElementById("btnDeleteAll");
 //console.log(purchaseBtnDeleteAll)
 
-//supprimer le produit dans le local storage
-purchaseBtnDeleteAll.addEventListener("click", function () {
-  //.removeItem pour vider le panier
-  localStorage.removeItem("panier");
+//---creer l'evenement au click de la suppression du panier total avec une alerte à l'utilisateur
+function supprimerToutArticle() {
+  purchaseBtnDeleteAll.addEventListener("click", function () {
+    //removeItem pour vider le panier
+    localStorage.removeItem("panier");
 
-  //affichage alert "Your purchase is empty"
-  alert("Your purchase is empty");
-  window.location.href = "panier.html"; //au moment de la recharge de la page
-});
+    //affichage alert "Your purchase is empty"
+    alert("Your purchase is empty");
+    window.location.href = "panier.html"; //au moment de la recharge de la page
+  });
+}
+supprimerToutArticle();
 
-//---------------addition montant total du panier---------------------------------------------------
+//---addition montant total du panier
 let totalAmount = [];
-if (productLocalStorage !== null) {
-  for (let m = 0; m < productLocalStorage.length; m++) {
-    //console.log(productLocalStorage)
-    //creer variable dans laquelle on met tt les prix
-    let priceByProduct = productLocalStorage[m].price;
 
-    //mettre dans array totalAmount les prix
-    totalAmount.push(priceByProduct);
-    //console.log(priceByProduct)
-    //console.log(totalAmount)
+function tableauDesPrix() {
+  if (productLocalStorage !== null) {
+    for (let m = 0; m < productLocalStorage.length; m++) {
+      //console.log(productLocalStorage)
+      //creer variable dans laquelle on met tt les prix
+      let priceByProduct = productLocalStorage[m].price;
+
+      //mettre dans array totalAmount les prix
+      totalAmount.push(priceByProduct);
+      //console.log(priceByProduct)
+      //console.log(totalAmount)
+    }
   }
 }
-// methode pour faire les additions (reduce)
+tableauDesPrix();
+
+//---methode pour faire les additions (reduce)
 let reducer = (accumulator, currentValue) => accumulator + currentValue;
 //console.log(reducer)
 let totalPrice = totalAmount.reduce(reducer, 0);
 totalPrice = (Math.round(totalPrice * 100) / 100).toFixed(2);
 //console.log(totalPrice)
 
-// prix total a afficher dans html
-//creer la variable avec html
+//---prix total a afficher dans html
 let totalAmountHtml = `
 <div class="totalAmountHtml">Total Amount = ${totalPrice} € </div>`;
 //console.log(totalAmountHtml)
@@ -137,13 +133,11 @@ let totalAmountHtml = `
 purchasePage.insertAdjacentHTML("beforeend", totalAmountHtml);
 //console.log(purchasePage)
 
-//--------------------------------formulaire dans local storage-------------------------------------
+//---formulaire dans local storage
 //creer une fonction
 let formulaireHtml = () => {
-  //dom vs html
   let formulaireSection = document.getElementById("purchasePage");
-
-  //integrer le html dans une variable
+  //creer le html
   let formulaireStructure = `
   <div id="formulaireTitre">
     <h2>Please complete this online registration form</h2>
@@ -174,10 +168,9 @@ let formulaireHtml = () => {
   `;
   formulaireSection.insertAdjacentHTML("afterend", formulaireStructure);
 };
-//appel de la fonction
 formulaireHtml();
 
-//------------------------selection du btn confirm my order-----------------------------------------
+//---selection du btn confirm my order
 let confirmForm = document.getElementById("confirmForm");
 //console.log(confirmForm)
 
@@ -192,30 +185,30 @@ confirmForm.addEventListener("click", function () {
     city: document.getElementById("city").value,
   };
   //console.log(contact)
-  //------------------------------controler la saisie du formulaire-----------------------------
 
-  // creer une fonction et controler la saisie de l'utilisateur avec la method regex
-  //1.creer une fonction avec les valeurs du regex a reutiliser
+  //---controler la saisie du formulaire
 
-  //fonction textAlert pour ne pas avoir a repeter
+  //fonction textAlert qui alerte l'utilisateur de la bonne ecriture des champs
   let textAlert = (value) => {
     return value + " : Please enter valid informations";
   };
 
-  //fonction regEx first name, last name pour ne pas avoir a repeter
+  //fonctions avec les valeurs du regex a reutiliser pour chaque champs à controler
+  /*let regExNameCity = function(value){
+    return /^([A-Za-z]{3,20})?([-]{0,1})?([A-Za-z]{3,20})$/.test(value)
+  }*/
   let regExNameCity = (value) => {
     return /^([A-Za-z]{3,20})?([-]{0,1})?([A-Za-z]{3,20})$/.test(value);
   };
-  //fonctionr regEx email pour ne pas avoir a repeter (trouver sur le site regEx.com)
   let regExMail = (value) => {
     return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value);
   };
-  //fonction regEx address pour ne pas avoir a repeter
   let regExAddress = (value) => {
     return /^[A-Za-z0-9\s]{5,50}$/.test(value);
   };
 
-  //----------------------------pour le first name-------------------------
+  //Fonctions pour chaque champ a controler
+  //---fonction de control du champ first name
   function controlFirstName() {
     let controlFormFirstName = contact.firstName;
     //console.log(controlForm)
@@ -228,7 +221,8 @@ confirmForm.addEventListener("click", function () {
       return false;
     }
   }
-  //----------------------------pour le last name----------------------------
+
+  //---Fonction de control du champ last name
   function controlLastName() {
     let controlFormLastName = contact.lastName;
     //console.log(controlForm)
@@ -241,7 +235,7 @@ confirmForm.addEventListener("click", function () {
       return false;
     }
   }
-  //----------------------------pour l'email---------------------------------
+  //---Fonction de control du champ email
   function controlMail() {
     let controlFormEmail = contact.email;
     //console.log(controlForm)
@@ -254,7 +248,7 @@ confirmForm.addEventListener("click", function () {
       return false;
     }
   }
-  //------------------------pour address--------------------------------
+  //---Fonction de control du champ address
 
   function controlAddress() {
     let controlFormAddress = contact.address;
@@ -269,7 +263,7 @@ confirmForm.addEventListener("click", function () {
     }
   }
 
-  //----------------------------pour le first name-------------------------
+  //---fonction de control du champ city
   function controlCity() {
     let controlFormCity = contact.city;
     //console.log(controlForm)
@@ -283,7 +277,7 @@ confirmForm.addEventListener("click", function () {
     }
   }
 
-  //--------------------- envoi du formulaire au local storage
+  //---envoi du formulaire au local storage
   if (
     controlFirstName() &&
     controlLastName() &&
@@ -291,12 +285,11 @@ confirmForm.addEventListener("click", function () {
     controlAddress() &&
     controlCity()
   ) {
-    //mettre l'objet formValue sous forme de key, regarder dans le local storage
+    //mettre l'objet contact sous forme de key, regarder dans le local storage
     localStorage.setItem("contact", JSON.stringify(contact));
     //console.log(contact)
-    //mettre le prix total (variable ligne 134) dans le local storage pour pouvoir le recuperer et l'afficher sur la page confirmation
+    //mettre le prix total dans le local storage pour pouvoir le recuperer et l'afficher sur la page confirmation
     localStorage.setItem("totalPrice", JSON.stringify(totalPrice));
-
     //mettre les produits du local storage + formValue dans un objet a envoyer au serveur
     let productIds = [];
     for (let n = 0; n < productLocalStorage.length; n++) {
@@ -305,15 +298,14 @@ confirmForm.addEventListener("click", function () {
       productIds.push(idByProduct);
       //console.log(productIds);
     }
-    //
-
+    //objet contenant les clés a renvoyer 
     let aEnvoyer = {
       products: productIds,
       contact: contact,
-      prixTotal: totalPrice
+      prixTotal: totalPrice,
     };
     //console.log(aEnvoyer)
-    //-------------------------envoi de l'objet aEnvoyer vers le serveur----------
+    //---fonction de la reponse du serveur
     sendServer(aEnvoyer);
   } else {
     //alert("Please enter valid informations");
@@ -321,7 +313,7 @@ confirmForm.addEventListener("click", function () {
 });
 
 function sendServer(aEnvoyer) {
-  let e = fetch("http://localhost:3000/api/teddies/order", {
+  fetch("http://localhost:3000/api/teddies/order", {
     method: "POST",
     body: JSON.stringify(aEnvoyer),
     headers: {
@@ -330,19 +322,18 @@ function sendServer(aEnvoyer) {
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log("POST request response data", data); //reponse du serveur dans la console (non presente dans le local storage)
-
-      //----------------recuperer la reponse du serveur dans le local storage------------------------------------
+      //console.log("POST request response data", data); //reponse du serveur dans la console (non presente dans le local storage)
+      //---recuperer la reponse du serveur dans le local storage
       localStorage.setItem("reponseServeur", JSON.stringify(data));
-      console.log(data)
-
-      //----------------Envoi de la reponse du serveur vers la page confirmation commande------------------
+      console.log(data);
+      //---Envoi de la reponse du serveur vers la page confirmation commande
       window.location = "confirmation.html";
-
     });
 }
 
-//------------------------garder les saisies du formulaire actif si changement de page
+
+function saisieFormulaireActif(){
+//---garder les saisies du formulaire actif si changement de page
 // recup la key du local storage et mettre dans une variable
 let infoLocalStorage = localStorage.getItem("contact");
 //console.log(infoLocalStorage)
@@ -351,7 +342,7 @@ let infoLocalStorage = localStorage.getItem("contact");
 let infoLocalStorageCaractere = JSON.parse(infoLocalStorage);
 //console.log(infoLocalStorageCaractere)
 
-//prendre chaque value du local storage dans les champs du formulaire
+//attribuer les values correspondantes du local storage dans les champs du formulaire
 document
   .getElementById("firstName")
   .setAttribute("value", infoLocalStorageCaractere.firstName);
@@ -367,4 +358,6 @@ document
 document
   .getElementById("city")
   .setAttribute("value", infoLocalStorageCaractere.city);
+}
+saisieFormulaireActif()
 //--------------------------------------------------------------------------------------

@@ -1,7 +1,18 @@
-
+@font-face {
+    font-family: 'robotoregular';
+    src: url('Roboto-Regular-webfont.eot');
+    src: url('Roboto-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('Roboto-Regular-webfont.woff2') format('woff2'),
+         url('../fonts/roboto_regular_macroman/Roboto-Regular-webfont.woff') format('woff'),
+         url('Roboto-Regular-webfont.ttf') format('truetype'),
+         url('Roboto-Regular-webfont.svg#robotoregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
 *{
     margin: 0;
     padding: 0;
+    font-family: "robotoregular", Arial, Helvetica, sans-serif;
 }
 .main-Wrapper{ 
     width: 1440px;
@@ -30,7 +41,7 @@ nav, ul{
     justify-content: flex-end;
     list-style: none;
     margin-right: 20px;
-    font-size: 1.1em;
+    font-size: 1.2em;
     font-weight: bold;
      li{
          margin-left: 40px;
@@ -58,7 +69,8 @@ img{
     border-radius: 20px;
 }
 form{
-    margin-bottom: 20px;
+    margin-bottom: 40px;
+    font-size: 1.2em;
 }
 .colorLabel{
     font-size: 1.1em;
@@ -66,18 +78,22 @@ form{
 }
 #colorList{
     margin-top: 20px;
+    margin-bottom: 20px;
     width: 200px;
     height: 30px;
 }
 
 #purchaseBtn{
-    height: 40px;
+    height: 60px;
+    width: 80%;
     border-radius: 20px;
-    background-color: rgb(243, 233, 241);
-    border: 2px solid rgb(243, 233, 241);
-    margin-bottom: 40px;
-    font-size: 1em;
+    background-color: rgb(236, 213, 232);
+    border: 1px solid rgb(236, 213, 232);
+    margin-bottom: 60px;
+    font-size: 1.2em;
     font-weight: bold;
+    box-shadow: 1px 1px 1px gray;
+    cursor: pointer;
 }
 #productRef{
     display: flex;
@@ -86,17 +102,21 @@ form{
 }
 .productName{
     margin-bottom: 15px;
-    font-size: 1em;
+    font-size: 1.2em;
+    margin-bottom: 40px;
     
 }
 .productPrice{
     margin-bottom: 15px;
-    font-size: 1em;
+    font-size: 1.2em;
+    margin-bottom: 40px;
     
 }
 .productDescript{
     margin-bottom: 15px;
-    font-size: 1em;
+    margin-top: 30px;
+    font-size: 1.1em;
+    width: 80%;
     
 }
 footer{
@@ -106,12 +126,6 @@ footer{
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    font-size: 1.2em;
 }
-.Rsociaux{
-    height: 70px;
-    width: 400px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
+

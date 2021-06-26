@@ -1,6 +1,20 @@
+
+@font-face {
+    font-family: 'robotoregular';
+    src: url('Roboto-Regular-webfont.eot');
+    src: url('Roboto-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('Roboto-Regular-webfont.woff2') format('woff2'),
+         url('../fonts/roboto_regular_macroman/Roboto-Regular-webfont.woff') format('woff'),
+         url('Roboto-Regular-webfont.ttf') format('truetype'),
+         url('Roboto-Regular-webfont.svg#robotoregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
 *{
     margin: 0;
     padding: 0;
+    font-family: "robotoregular", Arial, Helvetica, sans-serif;
 }
 .main-Wrapper{ 
     width: 1440px;
@@ -29,7 +43,7 @@ nav, ul{
     justify-content: flex-end;
     list-style: none;
     margin-right: 50px;
-    font-size: 1.1em;
+    font-size: 1.2em;
     font-weight: bold;
      li{
          margin-left: 40px;
@@ -45,32 +59,37 @@ a:hover{
 .styleProduct{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-wrap: wrap;
     height: auto;
     width: 100%;
 }
 .productRef{
-    border-radius: 30px;
+    border-radius: 40px;
     margin-bottom: 50px;
-    background-color: rgba(169, 169, 169, 0.6);
-    padding: 20px;
-    width: 650px;
+    background-color: rgb(236, 213, 232);
+    width: 490px;
+    height: 460px;
+    margin-right: 80px;
 }
 img{
-    width: 650px;
-    height: 500px;
+    width: 470px;
+    height: 360px;
     object-fit: cover;
     margin-bottom: 10px;
-    border-radius: 20px;
+    margin-left: 10px;
+    margin-top: 10px;
+    border-radius: 30px;
+    
 }
 .productName{
     font-size: 1.3em;
     margin-bottom: 5px;
+    margin-left: 20px;
 }
 .productPrice{
     font-size: 1.3em;
-    margin-bottom: 10px;
+    margin-left: 20px;
 }
 
 footer{
@@ -80,14 +99,8 @@ footer{
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    font-size: 1.2em;
 }
-.Rsociaux{
-    height: 70px;
-    width: 400px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
+
 
 
