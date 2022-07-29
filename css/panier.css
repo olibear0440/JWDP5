@@ -5,7 +5,7 @@
 }
 
 .main-Wrapper {
-  width: 1440px;
+  width: 1024px;
   margin: 0 auto;
   height: auto;
   background-color: white;
@@ -25,7 +25,7 @@ header {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  height: 170px;
+  height: 150px;
   margin-bottom: 40px;
   background-color: #f3e9f1;
 }
@@ -33,8 +33,8 @@ header {
 .logo {
   border-radius: 0;
   margin-left: 20px;
-  height: 100px;
-  width: 160px;
+  height: 150px;
+  width: 250px;
 }
 
 nav, ul {
@@ -50,7 +50,7 @@ nav, ul {
           justify-content: flex-end;
   list-style: none;
   margin-right: 20px;
-  font-size: 1.2em;
+  font-size: 1.3em;
   font-weight: bold;
 }
 
@@ -60,6 +60,7 @@ nav li, ul li {
 
 nav a, ul a {
   text-decoration: none;
+  color: #db6a8f;
 }
 
 a:hover {
@@ -74,7 +75,7 @@ a:hover {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  font-size: 1.5em;
+  font-size: 1.3em;
   width: 100%;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
@@ -83,6 +84,7 @@ a:hover {
 
 .purchaseRecap {
   height: 50px;
+  padding: 5px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -91,8 +93,12 @@ a:hover {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background-color: #e7bdae;
-  margin-bottom: 20px;
+  border-bottom: #db6a8f 1px solid;
+}
+
+.textName, .textColor, .priceNbtn {
+  width: 33%;
+  font-size: 1em;
 }
 
 .priceNbtn {
@@ -115,42 +121,46 @@ a:hover {
   width: 100px;
   margin-left: 50px;
   font-size: 1em;
+  border: none;
+  background-color: white;
+  color: #db6a8f;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-.purchaseTotalAmount {
-  height: 60px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-h1 {
-  margin-bottom: 20px;
-}
-
-#btnDeleteAll {
-  height: 60px;
-  width: 50%;
-  font-size: large;
-  font-size: 1.1em;
-  margin: 50px auto 50px;
-  border-radius: 20px;
-  background-color: #ecd5e8;
-  -webkit-box-shadow: 1px 1px 1px gray;
-          box-shadow: 1px 1px 1px gray;
+.totalAmountHtml, .totalPrice {
+  width: 30%;
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #db6a8f;
+  background-color: #e8f2ea;
+  text-align: end;
+  padding: 10px;
+  height: auto;
+  margin-left: 700px;
 }
 
 .totalAmountHtml {
-  margin-top: 20px;
-  text-align: center;
+  margin-top: 30px;
+}
+
+.totalPrice {
   margin-bottom: 50px;
-  background-color: cyan;
-  padding: 10px;
+}
+
+#btnDeleteAll {
+  height: 50px;
+  width: 13%;
+  font-size: 1em;
+  font-weight: bold;
+  margin: 20px 0px 0px 87%;
+  border-radius: 10px;
+  background-color: #ecd5e8;
+  border: 1px solid #ecd5e8;
+  -webkit-box-shadow: 1px 1px 1px gray;
+          box-shadow: 1px 1px 1px gray;
+  color: #db6a8f;
+  cursor: pointer;
 }
 
 #formulaireTitre {
@@ -159,7 +169,7 @@ h1 {
 }
 
 .formulaireContenu {
-  width: 20%;
+  width: 30%;
   height: auto;
   margin: 0 auto;
 }
@@ -175,8 +185,8 @@ form {
 }
 
 input {
-  height: 25px;
-  font-size: 1.1em;
+  height: 30px;
+  font-size: 1.3em;
 }
 
 #address {
@@ -184,9 +194,18 @@ input {
 }
 
 #confirmForm {
-  height: 40px;
+  height: 50px;
   margin-bottom: 20px;
   font-size: 1.1em;
+  border-radius: 10px;
+  background-color: #ecd5e8;
+  border: 1px solid #ecd5e8;
+  font-size: 1.3em;
+  font-weight: bold;
+  -webkit-box-shadow: 1px 1px 1px gray;
+          box-shadow: 1px 1px 1px gray;
+  cursor: pointer;
+  color: #db6a8f;
 }
 
 footer {

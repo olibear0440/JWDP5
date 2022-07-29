@@ -5,7 +5,7 @@
 }
 
 .main-Wrapper {
-  width: 1440px;
+  width: 1024px;
   margin: 0 auto;
   height: auto;
   background-color: white;
@@ -25,8 +25,8 @@ header {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  height: 170px;
-  margin-bottom: 50px;
+  height: 150px;
+  margin-bottom: 30px;
   background-color: #f3e9f1;
 }
 
@@ -34,7 +34,7 @@ header {
   border-radius: 0;
   margin-left: 20px;
   height: 100px;
-  width: 160px;
+  width: 250px;
 }
 
 nav, ul {
@@ -50,16 +50,18 @@ nav, ul {
           justify-content: flex-end;
   list-style: none;
   margin-right: 20px;
-  font-size: 1.2em;
+  font-size: 1.3em;
   font-weight: bold;
 }
 
 nav li, ul li {
   margin-left: 40px;
+  padding: 5px;
 }
 
 nav a, ul a {
   text-decoration: none;
+  color: #db6a8f;
 }
 
 a:hover {
@@ -84,7 +86,7 @@ a:hover {
 }
 
 img {
-  width: 900px;
+  width: 60%;
   height: 600px;
   -o-object-fit: cover;
      object-fit: cover;
@@ -95,33 +97,35 @@ img {
 
 form {
   margin-bottom: 40px;
-  font-size: 1.2em;
+  font-size: 1.3em;
 }
 
 .colorLabel {
-  font-size: 1.1em;
+  font-size: 1.5em;
   font-weight: bold;
 }
 
 #colorList {
   margin-top: 20px;
   margin-bottom: 20px;
-  width: 200px;
-  height: 30px;
+  width: 300px;
+  height: 40px;
+  cursor: pointer;
 }
 
 #purchaseBtn {
   height: 60px;
-  width: 80%;
+  width: 90%;
   border-radius: 20px;
   background-color: #ecd5e8;
   border: 1px solid #ecd5e8;
   margin-bottom: 60px;
-  font-size: 1.2em;
+  font-size: 1.3em;
   font-weight: bold;
   -webkit-box-shadow: 1px 1px 1px gray;
           box-shadow: 1px 1px 1px gray;
   cursor: pointer;
+  color: #db6a8f;
 }
 
 #productRef {
@@ -132,25 +136,29 @@ form {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  padding-left: 50px;
+  padding-top: 50px;
 }
 
 .productName {
   margin-bottom: 15px;
-  font-size: 1.2em;
+  font-size: 1.5em;
   margin-bottom: 40px;
+  font-weight: bold;
 }
 
 .productPrice {
   margin-bottom: 15px;
-  font-size: 1.2em;
+  font-size: 1.5em;
   margin-bottom: 40px;
+  font-weight: bold;
 }
 
 .productDescript {
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   margin-top: 30px;
   font-size: 1.1em;
-  width: 80%;
+  width: 90%;
 }
 
 footer {

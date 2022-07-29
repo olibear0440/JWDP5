@@ -21,7 +21,7 @@ window.onload = function () {
 
     //btn (vider entierement le panier), creer le html, afficher le btnDeleteAll
     let btnDeleteAll =
-      '<button id="btnDeleteAll">Delete your purchase</button>';
+      '<button id="btnDeleteAll">Delete all</button>';
     purchasePage.insertAdjacentHTML("beforeend", btnDeleteAll);
     purchaseBtnDeleteAll = document.getElementById("btnDeleteAll");
 
@@ -41,7 +41,8 @@ window.onload = function () {
 
     //tarif total a afficher dans html
     let totalAmountHtml = `
-    <div class="totalAmountHtml">Total Amount = ${totalPrice} € </div>`;
+    <div class="totalAmountHtml">Total Amount</div>
+    <div class="totalPrice">${totalPrice} € </div>`;
     purchasePage.insertAdjacentHTML("beforeend", totalAmountHtml);
 
     //fonction(ligne 161) creer le formulaire dans le html et afficher dans la page
@@ -105,9 +106,9 @@ function afficherPanier() {
       divSection +
       `
     <div class="purchaseRecap">
-    <div class="textName">Teddy : ${productLocalStorage[k].spanName} </div>
-    <div class="textColor">Color : ${productLocalStorage[k].colors}</div>
-    <div class="priceNbtn">Price : ${p} € <button class="btnDelete">Delete</button></div>
+    <div class="textName"> ${productLocalStorage[k].spanName} </div>
+    <div class="textColor">  ${productLocalStorage[k].colors}</div>
+    <div class="priceNbtn">  ${p} € <button class="btnDelete">Delete</button></div>
     </div>
     `;
   }
@@ -163,7 +164,7 @@ let formulaireHtml = () => {
   let formulaireSection = document.getElementById("purchasePage");
   let formulaireStructure = `
   <div id="formulaireTitre">
-    <h2>Please complete this online registration form</h2>
+    <h2>Please complete this online registration</h2>
   </div>
 
   <div class="formulaireContenu">
@@ -184,7 +185,7 @@ let formulaireHtml = () => {
   <input type="text" id="city" name="city" required><br> 
 
   <button id="confirmForm" type="submit" name="confirmForm">
-   Confirm my order
+   I confirm my order
   </button>
   </form>
   </div>
